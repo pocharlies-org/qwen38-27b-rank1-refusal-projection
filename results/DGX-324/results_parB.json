@@ -74,17 +74,34 @@
           "format_base": "modelopt-NVFP4/g16",
           "format_abl": "ct-NVFP4/g16",
           "format_mismatch": true
+        },
+        {
+          "key": "mtp.layers.0.self_attn.o_proj.weight",
+          "delta": 0.019605271490104093,
+          "untouched": false,
+          "s0": 2.247184549306947,
+          "s1": 0.021515843474637295,
+          "s0_over_s1": 104.44324676166706,
+          "rank1E": 0.9939361323505025,
+          "cos": 0.99993748266403,
+          "lam_eff": 1.0002574790183016,
+          "dim": 2560,
+          "random_cos_floor": 0.01976423537605237,
+          "compute_dtype": "float64",
+          "format_base": "BF16",
+          "format_abl": "BF16",
+          "format_mismatch": false
         }
       ],
       "coherence": {
         "min": 0.9845543243716016,
-        "median": 0.992233196144662
+        "median": 0.9997661878277442
       },
       "verdict": "CLEAN rank-1",
       "aggregate_paired": {
-        "n_paired": 1,
+        "n_paired": 2,
         "min_s0_over_s1": 102.27111363230752,
-        "max_s0_over_s1": 102.27111363230752,
+        "max_s0_over_s1": 104.44324676166706,
         "n_format_mismatch": 3
       },
       "direction_module": "model.language_model.layers.0.linear_attn.out_proj.weight",
