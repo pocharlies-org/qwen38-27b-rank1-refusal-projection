@@ -8,6 +8,23 @@
       "revision_sha": "da29941aee972c7eeab497e05a292c569da1f1d6",
       "modules": [
         {
+          "key": "model.language_model.layers.0.linear_attn.out_proj.weight",
+          "delta": 0.019766699163968327,
+          "untouched": false,
+          "s0": 1.341385875982874,
+          "s1": 0.012412134257417468,
+          "s0_over_s1": 108.07052583895992,
+          "rank1E": 0.9939881447300428,
+          "cos": 0.9999567751359904,
+          "lam_eff": 0.9997246325017908,
+          "dim": 2560,
+          "random_cos_floor": 0.01976423537605237,
+          "compute_dtype": "float64",
+          "format_base": "BF16",
+          "format_abl": "BF16",
+          "format_mismatch": false
+        },
+        {
           "key": "model.language_model.embed_tokens.weight",
           "delta": 0.018509728834033012,
           "untouched": false,
@@ -25,12 +42,15 @@
           "format_mismatch": false
         }
       ],
-      "coherence": null,
+      "coherence": {
+        "min": 0.9999853332115003,
+        "median": 0.9999922920086053
+      },
       "verdict": "REJECTED (not projection-shaped)",
       "aggregate_paired": {
-        "n_paired": 1,
+        "n_paired": 2,
         "min_s0_over_s1": 87.76584142590679,
-        "max_s0_over_s1": 87.76584142590679,
+        "max_s0_over_s1": 108.07052583895992,
         "n_format_mismatch": 0
       },
       "direction_module": "model.language_model.layers.0.linear_attn.out_proj.weight",
