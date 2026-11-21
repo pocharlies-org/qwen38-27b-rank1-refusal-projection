@@ -1,0 +1,44 @@
+{
+  "base": "RadixArk/Qwen3.8-Flash-Next-NVFP4",
+  "base_rev": "7b719225242aacd3dbd3f9407468c2ee9a9d2594",
+  "base_revision_sha": "7b719225242aacd3dbd3f9407468c2ee9a9d2594",
+  "candidates": {
+    "orcarouter/Qwen3.8-Flash-Next-Uncensored-NVFP4": {
+      "rev": "9c6f1345b523a9d9d70b41542a63b39e3c9b7ca6",
+      "revision_sha": "9c6f1345b523a9d9d70b41542a63b39e3c9b7ca6",
+      "modules": [
+        {
+          "key": "model.language_model.layers.0.linear_attn.out_proj.weight",
+          "delta": 0.033042869769529463,
+          "untouched": false,
+          "s0": 1.342612336399298,
+          "s1": 0.07400302098670421,
+          "s0_over_s1": 18.14266929238631,
+          "rank1E": 0.3563590568027557,
+          "cos": 0.9994221100405232,
+          "lam_eff": 1.0009308593619168,
+          "dim": 2560,
+          "random_cos_floor": 0.01976423537605237,
+          "compute_dtype": "float64",
+          "format_base": "BF16",
+          "format_abl": "F8_E4M3/per-channel",
+          "format_mismatch": true
+        }
+      ],
+      "coherence": null,
+      "verdict": "NO PAIRED DATA (every module changed format between the two sides)",
+      "aggregate_paired": {
+        "n_paired": 0,
+        "min_s0_over_s1": null,
+        "max_s0_over_s1": null,
+        "n_format_mismatch": 1
+      },
+      "direction_module": "model.language_model.layers.0.linear_attn.out_proj.weight",
+      "sign_rule": "largest-|component| entry positive, applied to both vectors",
+      "cos_direction_signed": {
+        "results/DGX-324/refusal_direction_flashnext_served.npy": null,
+        "results/DGX-324/refusal_direction_flashnext_wxp15.npy": null
+      }
+    }
+  }
+}
