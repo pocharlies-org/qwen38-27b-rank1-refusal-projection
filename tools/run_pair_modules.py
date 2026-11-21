@@ -155,6 +155,10 @@ def main() -> int:
     print(f"abl:  {abl}@{rev} -> {entry['revision_sha']}")
     print(f"modules: {len(mods)} ({len(rows)} already in {path.name})", flush=True)
 
+    # Aggregates cover the whole pair, not just this invocation: a resumed run asked for
+    # one module must not rewrite the verdict as if the other seven had never been read.
+    all_mods = list(mods) + [k for k in rows if k not in set(mods)]
+
     for key in mods:
         if key in rows and not rows[key].get("error"):
             print(f"  {short(key):<34} already measured, skipped", flush=True)
@@ -177,7 +181,7 @@ def main() -> int:
             print(f"  {short(key):<34} s0/s1={r['s0_over_s1']:8.2f}  rank1E={r['rank1E']:.4f}  "
                   f"cos={r['cos']:.4f}  lam_eff={r['lam_eff']:.4f}  delta={r['delta']:.5f}"
                   f"  floor={r['random_cos_floor']:.4f}{mm}", flush=True)
-        files = finish_candidate(st, abl, mods, rows, u0s, args)
+        files = finish_candidate(st, abl, all_mods, rows, u0s, args)
         git(args.worktree, "add", *files)
         git(args.worktree, "commit", "-m",
             f"DGX-1658: {args.label} — {short(key)} medido (revisiones fijadas por SHA)\n\n"
@@ -185,7 +189,7 @@ def main() -> int:
         if args.branch:
             git(args.worktree, "push", "origin", args.branch)
 
-    finish_candidate(st, abl, mods, rows, u0s, args)
+    finish_candidate(st, abl, all_mods, rows, u0s, args)
     entry = st["candidates"][abl]
     agg = entry["aggregate_paired"]
     print(f"\n{abl}: verdict={entry['verdict']}  paired={agg['n_paired']} "
