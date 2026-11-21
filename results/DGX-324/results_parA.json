@@ -40,15 +40,32 @@
           "format_base": "BF16",
           "format_abl": "BF16",
           "format_mismatch": false
+        },
+        {
+          "key": "model.language_model.layers.11.self_attn.o_proj.weight",
+          "delta": 0.020284624899229206,
+          "untouched": false,
+          "s0": 1.6264939049897753,
+          "s1": 0.015577168514407422,
+          "s0_over_s1": 104.41524744920238,
+          "rank1E": 0.9942821691369272,
+          "cos": 0.9999583196375642,
+          "lam_eff": 1.0000196269282058,
+          "dim": 2560,
+          "random_cos_floor": 0.01976423537605237,
+          "compute_dtype": "float64",
+          "format_base": "BF16",
+          "format_abl": "BF16",
+          "format_mismatch": false
         }
       ],
       "coherence": {
         "min": 0.9999940969558184,
-        "median": 0.9999940969558184
+        "median": 0.9999944168008771
       },
       "verdict": "CLEAN rank-1",
       "aggregate_paired": {
-        "n_paired": 2,
+        "n_paired": 3,
         "min_s0_over_s1": 102.27111363230752,
         "max_s0_over_s1": 108.07052583895992,
         "n_format_mismatch": 0
