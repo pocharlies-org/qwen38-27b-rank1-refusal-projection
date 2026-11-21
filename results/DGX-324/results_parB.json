@@ -99,6 +99,14 @@
           "format_base": "BF16",
           "format_abl": "BF16",
           "format_mismatch": false
+        },
+        {
+          "key": "mtp.fc_embedding.weight",
+          "delta": 0.0,
+          "untouched": true,
+          "format_base": "BF16",
+          "format_abl": "BF16",
+          "format_mismatch": false
         }
       ],
       "coherence": {
