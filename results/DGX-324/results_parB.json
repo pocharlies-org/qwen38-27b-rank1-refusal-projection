@@ -57,18 +57,35 @@
           "format_base": "BF16",
           "format_abl": "F8_E4M3/per-channel",
           "format_mismatch": true
+        },
+        {
+          "key": "model.language_model.layers.0.mlp.experts.0.down_proj.weight",
+          "delta": 0.07161357525976284,
+          "untouched": false,
+          "s0": 0.3136613264377652,
+          "s1": 0.0767010297273006,
+          "s0_over_s1": 4.089401766220644,
+          "rank1E": 0.07412641557386795,
+          "cos": 0.9780876102252865,
+          "lam_eff": 1.0399130461594421,
+          "dim": 2560,
+          "random_cos_floor": 0.01976423537605237,
+          "compute_dtype": "float64",
+          "format_base": "modelopt-NVFP4/g16",
+          "format_abl": "ct-NVFP4/g16",
+          "format_mismatch": true
         }
       ],
       "coherence": {
-        "min": 0.9996969253954451,
-        "median": 0.9998354502600433
+        "min": 0.9845543243716016,
+        "median": 0.992233196144662
       },
       "verdict": "CLEAN rank-1",
       "aggregate_paired": {
         "n_paired": 1,
         "min_s0_over_s1": 102.27111363230752,
         "max_s0_over_s1": 102.27111363230752,
-        "n_format_mismatch": 2
+        "n_format_mismatch": 3
       },
       "direction_module": "model.language_model.layers.0.linear_attn.out_proj.weight",
       "sign_rule": "largest-|component| entry positive, applied to both vectors",
