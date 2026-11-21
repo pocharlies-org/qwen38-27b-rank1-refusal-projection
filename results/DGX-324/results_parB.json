@@ -40,10 +40,27 @@
           "format_base": "BF16",
           "format_abl": "BF16",
           "format_mismatch": false
+        },
+        {
+          "key": "model.language_model.layers.11.self_attn.o_proj.weight",
+          "delta": 0.03336652607569684,
+          "untouched": false,
+          "s0": 1.627278160768006,
+          "s1": 0.10876330386645698,
+          "s0_over_s1": 14.961647016221846,
+          "rank1E": 0.36782423408532205,
+          "cos": 0.999485649459308,
+          "lam_eff": 1.0003422395180626,
+          "dim": 2560,
+          "random_cos_floor": 0.01976423537605237,
+          "compute_dtype": "float64",
+          "format_base": "BF16",
+          "format_abl": "F8_E4M3/per-channel",
+          "format_mismatch": true
         }
       ],
       "coherence": {
-        "min": 0.9998354502600433,
+        "min": 0.9996969253954451,
         "median": 0.9998354502600433
       },
       "verdict": "CLEAN rank-1",
@@ -51,7 +68,7 @@
         "n_paired": 1,
         "min_s0_over_s1": 102.27111363230752,
         "max_s0_over_s1": 102.27111363230752,
-        "n_format_mismatch": 1
+        "n_format_mismatch": 2
       },
       "direction_module": "model.language_model.layers.0.linear_attn.out_proj.weight",
       "sign_rule": "largest-|component| entry positive, applied to both vectors",
