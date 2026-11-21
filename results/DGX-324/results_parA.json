@@ -8,27 +8,36 @@
       "revision_sha": "da29941aee972c7eeab497e05a292c569da1f1d6",
       "modules": [
         {
-          "key": "mtp.fc_embedding.weight",
-          "delta": 0.0,
-          "untouched": true,
+          "key": "model.language_model.layers.0.linear_attn.out_proj.weight",
+          "delta": 0.019766699163968327,
+          "untouched": false,
+          "s0": 1.341385875982874,
+          "s1": 0.012412134257417468,
+          "s0_over_s1": 108.07052583895992,
+          "rank1E": 0.9939881447300428,
+          "cos": 0.9999567751359904,
+          "lam_eff": 0.9997246325017908,
+          "dim": 2560,
+          "random_cos_floor": 0.01976423537605237,
+          "compute_dtype": "float64",
           "format_base": "BF16",
           "format_abl": "BF16",
           "format_mismatch": false
         }
       ],
       "coherence": null,
-      "verdict": "NO PAIRED DATA (every module changed format between the two sides)",
+      "verdict": "CLEAN rank-1",
       "aggregate_paired": {
-        "n_paired": 0,
-        "min_s0_over_s1": null,
-        "max_s0_over_s1": null,
+        "n_paired": 1,
+        "min_s0_over_s1": 108.07052583895992,
+        "max_s0_over_s1": 108.07052583895992,
         "n_format_mismatch": 0
       },
       "direction_module": "model.language_model.layers.0.linear_attn.out_proj.weight",
       "sign_rule": "largest-|component| entry positive, applied to both vectors",
       "cos_direction_signed": {
-        "results/DGX-324/refusal_direction_flashnext_served.npy": null,
-        "results/DGX-324/refusal_direction_flashnext_wxp15.npy": null
+        "results/DGX-324/refusal_direction_flashnext_served.npy": 0.9999703988120325,
+        "results/DGX-324/refusal_direction_flashnext_wxp15.npy": 0.40939090604386497
       }
     }
   }
