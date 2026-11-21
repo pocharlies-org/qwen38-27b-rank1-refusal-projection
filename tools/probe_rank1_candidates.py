@@ -550,7 +550,11 @@ def top_singular(dW: np.ndarray, iters: int = 200):
     numbers here are comparable with what actually ships in the directions file.
     """
     rng = np.random.default_rng(0)  # fixed: two runs on the same weights must agree
-    v = rng.standard_normal(dW.shape[1])
+    # The seed carries dW's dtype. A float64 seed upcasts every `dW @ v`, so a float32 ΔW
+    # (the BIG path, embed_tokens) was copied to 5 GB of float64 on each of the 800
+    # iterations: 25 min for the embedding measured against 3 min at float32. Same seed,
+    # same sequence — only the width of the arithmetic changes, and only on the BIG path.
+    v = rng.standard_normal(dW.shape[1]).astype(dW.dtype, copy=False)
     v /= np.linalg.norm(v)
     for _ in range(iters):
         u = dW @ v
@@ -565,7 +569,7 @@ def top_singular(dW: np.ndarray, iters: int = 200):
         v /= nv
     s0 = float(u @ dW @ v)
     dW1 = dW - s0 * np.outer(u, v)
-    v2 = rng.standard_normal(dW.shape[1])
+    v2 = rng.standard_normal(dW.shape[1]).astype(dW.dtype, copy=False)
     v2 /= np.linalg.norm(v2)
     for _ in range(iters):
         u2 = dW1 @ v2

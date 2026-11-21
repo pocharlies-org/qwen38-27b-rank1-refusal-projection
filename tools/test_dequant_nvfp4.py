@@ -360,6 +360,23 @@ def test_coherence_skips_other_widths():
         print("  ok  one vector -> no coherence")
 
 
+def test_top_singular_keeps_the_matrices_dtype():
+    """A float32 ΔW must stay float32 through the power iteration.
+
+    The seed used to be float64, so every `dW @ v` upcast the matrix: on the BIG path
+    (embed_tokens, 636M elements) each of the 800 iterations copied 5 GB of float64 — 25
+    min for one tensor, against 3 min at the matrix's own width. Same seed and same draw,
+    so the number is the same number; only the width of the arithmetic changed.
+    """
+    dW = np.random.default_rng(3).standard_normal((96, 64)).astype(np.float32)
+    u, v, s0, s1, e = P.top_singular(dW)
+    if u.dtype != np.float32 or v.dtype != np.float32:
+        fails.append(f"top_singular widened a float32 ΔW to {u.dtype}/{v.dtype}")
+    else:
+        print("  ok  top_singular keeps a float32 ΔW at float32")
+    check("its s0 is the float64 iteration's", s0, P.top_singular(dW.astype(np.float64))[2], tol=1e-4)
+
+
 def main() -> int:
     print("dequant path:")
     for t in (test_fp8_table, test_e2m1_lut, test_nibble_order, test_modelopt_nvfp4,
@@ -369,7 +386,7 @@ def main() -> int:
     print("reader guards:")
     for t in (test_access_error_is_not_a_keyerror, test_cos_floor_follows_dim,
               test_canon_sign_is_deterministic, test_fused_expert_slice_and_row,
-              test_coherence_skips_other_widths):
+              test_coherence_skips_other_widths, test_top_singular_keeps_the_matrices_dtype):
         t()
     if fails:
         print(f"\nFAIL ({len(fails)}):")
